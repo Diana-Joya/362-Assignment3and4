@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+{% block title %} {{ current_user.name }}'s User Page {% endblock %}
+{% block description %}
+    {{ current_user.name }}
+{% endblock %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/userpage.css') }}"/>
+{% endblock %}
+{% block content %}
+<h1>{{current_user.name}} Restaurant Information:</h1>
+<div class="page">
+    <div class="restaurant-info">
+        <br>
+        <div class="cards">
+            <div class="info-card">
+                <div class="box-title">
+                    <h3 class="h3">Info:</h3>
+                </div>
+                <div class="box-content">
+                    <p><span class="span">Email:</span> {{ current_user.email }}</p>
+                    <p><span class="span">Address: </span>{{ current_user.address }}</p>
+                    <p><span class="span">Phone: </span>{{ current_user.phone }}</p>
+                    <p><span class="span">Food Type: </span>{{ current_user.food_type }} </p>
+                    <p><span class="span">Cost Level: </span>{{ current_user.cost }} </p>
+                    <p><span class="span">Current Capacity:</span> {{ current_user.capacity }}</p>
+                </div>
+            </div>
+            <div class="sched-card">
+                <div class="box-title">
+                    <h3 class="h3">Schedule: </h3>
+                </div>
+                <div class="box-content">
+                    {% for day in current_user.schedule %}
+                        {% if day.day == 0 %}
+                    <p><span class="span">Monday:</span>
+                                {% if day.open_time != 'None' and day.close_time != 'None' %}
+                                   {{day.open_time}} - {{day.close_time}}
+                                {% else %}
+                                    Closed
+                                {% endif %}
+                            </p>
+                        {% elif day.day == 1 %}
+                    <p><span class="span">Tuesday: </span>
+                                {% if day.open_time != 'None' and day.close_time != 'None' %}
+                                    {{day.open_time}} - {{day.close_time}}
+                                {% else %}
+                                    Closed
+                                {% endif %}
+                            </p>
+                        {% elif day.day == 2 %}
+                    <p><span class="span">Wednesday: </span>
+                                {% if day.open_time != 'None' and day.close_time != 'None' %}
+                                    {{day.open_time}} - {{day.close_time}}
+                                {% else %}
+                                    Closed
+                                {% endif %}
+                            </p>
+                        {% elif day.day == 3 %}
+                    <p><span class="span">Thursday:</span>
+                                {% if day.open_time != 'None' and day.close_time != 'None' %}
+                                    {{day.open_time}} - {{day.close_time}}
+                                {% else %}
+                                    Closed
+                                {% endif %}
+                            </p>
+                        {% elif day.day == 4 %}
+                    <p><span class="span">Friday:</span>
+                                {% if day.open_time != 'None' and day.close_time != 'None' %}
+                                    {{day.open_time}} - {{day.close_time}}
+                                {% else %}
+                                    Closed
+                                {% endif %}
+                            </p>
+                        {% elif day.day == 5 %}
+                    <p><span class="span">Saturday:</span>
+                                {% if day.open_time != 'None' and day.close_time != 'None' %}
+                                    {{day.open_time}} - {{day.close_time}}
+                                {% else %}
+                                    Closed
+                                {% endif %}
+                            </p>
+                        {% elif day.day == 6 %}
+                    <p><span class="span">Sunday:</span>
+                                {% if day.open_time != 'None' and day.close_time != 'None' %}
+                                    {{day.open_time}} - {{day.close_time}}
+                                {% else %}
+                                    Closed
+                                {% endif %}
+                            </p>
+                        {% else %}
+                            <p>No Business Hours Have Been Set Yet!</p>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="update-info">
+        <a href=update-restaurant-info> <button type="button" class="btn btn-info">Update Restaurant Info</button> </a>
+        <br><br>
+        <a href=restaurant-menu> <button type="button" class="btn btn-info">Update Menu</button> </a>
+        <br><br>
+        <a href=preview-page> <button type="button" class="btn btn-info">Webpage Preview</button> </a>
+    </div>
+</div>
+<br>
+{% endblock %}

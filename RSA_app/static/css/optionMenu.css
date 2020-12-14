@@ -1,0 +1,17 @@
+body {
+
+}
+
+.menu {
+    height: 468px;
+    top: 50%;
+    width: 100%;
+    text-align: center;
+    font-size: 18px;
+    padding-top: 4%;
+}
+
+.btn {
+    width: 200px;
+    height: 100px;
+}

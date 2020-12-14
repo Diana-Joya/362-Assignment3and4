@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %} Menu Page {% endblock %}
+{% block description %}
+    {{current_user.name}}'s Menu!
+{% endblock %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/orders.css') }}"/>
+{% endblock %}
+{% block content %}
+<div class="menu">
+    <br>
+    <div class="button-add">
+    <a href=newItem> <button type="button" class="btn btn-info add">Add New Menu Item</button> </a>
+    <br>
+        </div>
+    <div class="menu-cards">
+    {% for item in menu.menu_items %}
+        {% if item.available %}
+            <div class="item-card">
+                <div class="item">
+                    <h1 class="item-name">{{ item.name }}</h1>
+                    <br>
+                    <p class="ing"><span class="span">Ingredients: </span>{{ item.ingredients }}</p>
+                    <p class="allergens"><span class="span">Allergens:</span> {{ item.allergens }}</p>
+                    <p class="price"><span class="span">Price: </span>${{ item.price }}</p>
+                    <div class="buttons">
+                        <div class="edit">
+                        <form action="{{ url_for('edit_item') }}" method=post class=edit-item>
+                          <input type=hidden value="{{ item.item_id }}" name=item_to_edit />
+                          <input type=submit class="btn btn-info" value="Edit"/>
+                        </form>
+                            </div>
+                        <div class="del">
+                        <form action="{{ url_for('delete_item') }}" method=post class=delete-item>
+                          <input type=hidden value="{{ item.item_id }}" name=item_to_delete />
+                          <input type=submit class="btn btn-info" value="Delete"/>
+                        </form>
+                            </div>
+                    </div>
+                </div>
+                <br>
+            </div>
+        {% else %}
+            <p>Nothing</p>
+        {% endif %}
+        <br>
+    {% endfor %}
+</div>
+    </div>
+
+{% endblock %}

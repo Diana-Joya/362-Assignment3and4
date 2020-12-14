@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% block title %} Add Menu Item {% endblock %}
+{% block description %}
+    Update {{current_user.name}}'s Menu
+{% endblock %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/index.css') }}"/>
+{% endblock %}
+{% block content %}
+<div class="container-fluid column" id="UserAccountEdit">
+
+    <div class="content-section">
+        <form method="POST" action="" enctype="multipart/form-data">
+        {{form.hidden_tag()}}
+            <fieldset class="form-group">
+
+                <!-- Item Name -->
+                <div class="form-group">
+                {{ form.name.label(class="form-control-label") }}
+                {{ form.name(class="form-control") }}
+                {% if form.name.errors %}
+                  {% for error in form.name.errors %}
+                    <span class="text-danger">{{ error }}</span><br>
+                  {% endfor %}
+                  <br>
+                {% endif %}
+                </div>
+
+              <!-- Ingredients -->
+              <div class="form-group">
+                {{form.ing.label(class="form-control-label")}}
+
+                <!-- Prints out errors if any-->
+                {% if form.ing.errors %}
+                  {{ form.ing(class="form-control-lg is-invalid") }}
+                  <div class="invalid-feedback">
+                    {% for error in form.ing.errors %}
+                      <span>{{ error }}</span>
+                    {% endfor %}
+                  </div>
+                  {% else %}
+                    {{ form.ing(class="form-control form-control-lg") }}
+                {% endif %}
+              </div>
+
+              <!-- Allergens -->
+              <div class="form-group">
+                {{ form.allergens.label(class="form-control-label") }}
+
+                <!-- Prints out errors if any-->
+                {% if form.allergens.errors %}
+                  {{ form.allergens(class="form-control-lg is-invalid") }}
+                  <div class="invalid-feedback">
+                    {% for error in form.allergens.errors %}
+                      <span>{{ error }}</span>
+                    {% endfor %}
+                  </div>
+                  {% else %}
+                    {{ form.allergens(class="form-control form-control-lg") }}
+                {% endif %}
+              </div>
+
+              <!-- Price -->
+              <div class="form-group">
+                {{ form.price.label(class="form-control-label") }}
+
+                <!-- Prints out errors if any-->
+                {% if form.price.errors %}
+                  {{ form.price(class="form-control-lg is-invalid") }}
+                  <div class="invalid-feedback">
+                    {% for error in form.price.errors %}
+                      <span>{{ error }}</span>
+                    {% endfor %}
+                  </div>
+                  {% else %}
+                    {{ form.price(class="form-control form-control-lg") }}
+                {% endif %}
+              </div>
+
+
+                <!-- Available -->
+              <div class="form-group">
+                {{ form.avl.label(class="form-control-label") }}
+
+                <!-- Prints out errors if any-->
+                {% if form.avl.errors %}
+                  {{ form.avl(class="form-control-lg is-invalid") }}
+                  <div class="invalid-feedback">
+                    {% for error in form.avl.errors %}
+                      <span>{{ error }}</span>
+                    {% endfor %}
+                  </div>
+                  {% else %}
+                    {{ form.avl(class="form-control form-control-lg") }}
+                {% endif %}
+              </div>
+
+
+            </fieldset>
+            <div class="form-group butt-center2">
+              {{form.add_menu_item(class="btn btn-info resize",id = "Add")}}
+            </div>
+          </form>
+    </div>
+  </div>
+{% endblock %}

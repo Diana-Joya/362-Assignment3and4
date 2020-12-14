@@ -1,0 +1,66 @@
+h1 {
+    text-align: center;
+    padding: .8%;
+    color: #feb72b;
+}
+
+h2 {
+    font-weight: bold;
+    color: #feb72b;
+    text-align: center;
+}
+
+.status {
+    display: flex;
+    width: 100%;
+    height: 636px;
+}
+
+.open, .accepted {
+    flex: 1;
+}
+
+.span {
+    color: red;
+    font-weight: bold;
+}
+
+.menu-cards {
+    display: flex;
+    justify-content: space-evenly;
+    align-content: space-between;
+    flex-flow: row wrap;
+    padding: 20px;
+
+}
+
+.item-card {
+    flex: 1;
+    margin: 5px;
+    padding-left: 15px;
+    max-width: 50vmin;
+    min-width: 25vmax;
+    border-color: #feb72b;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 25px;
+}
+
+.button-add {
+    padding-bottom: 15px;
+    padding-left: 43%;
+}
+
+.buttons {
+    display: flex;
+    padding-left: 30%;
+}
+
+.edit, .del {
+    padding: 5px;
+}
+
+.add {
+    height: 80px;
+    width: 240px;
+}

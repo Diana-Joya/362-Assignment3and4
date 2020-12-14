@@ -1,0 +1,240 @@
+{% extends "base.html" %}
+{% block title %} Reservations Page {% endblock %}
+{% block description %}
+    {{current_user.name}}'s Reservation System
+{% endblock %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/reservations.css') }}"/>
+{% endblock %}
+{% block content %}
+<div class="update-system">
+    <div class="current">
+    <div class="current-availability">
+        <h3 class="h3">Current Capacity:</h3><p class="cap"> {{ current_user.capacity }} <span class="p"> (Total) </span> <span class="bs"> /</span> {{ current_user.capacity }} <span class="p"> (Open) </span></p>
+        <h3 class="h3">Current Schedule: </h3>
+        {% for day in current_user.schedule %}
+            {% if day.day == 0 %}
+        <p><span class="span">Monday:</span>
+                    {% if day.open_time != 'None' and day.close_time != 'None' %}
+                       {{day.open_time}} - {{day.close_time}}
+                    {% else %}
+                        Closed
+                    {% endif %}
+                </p>
+            {% elif day.day == 1 %}
+        <p><span class="span">Tuesday: </span>
+                    {% if day.open_time != 'None' and day.close_time != 'None' %}
+                        {{day.open_time}} - {{day.close_time}}
+                    {% else %}
+                        Closed
+                    {% endif %}
+                </p>
+            {% elif day.day == 2 %}
+        <p><span class="span">Wednesday: </span>
+                    {% if day.open_time != 'None' and day.close_time != 'None' %}
+                        {{day.open_time}} - {{day.close_time}}
+                    {% else %}
+                        Closed
+                    {% endif %}
+                </p>
+            {% elif day.day == 3 %}
+        <p><span class="span">Thursday:</span>
+                    {% if day.open_time != 'None' and day.close_time != 'None' %}
+                        {{day.open_time}} - {{day.close_time}}
+                    {% else %}
+                        Closed
+                    {% endif %}
+                </p>
+            {% elif day.day == 4 %}
+        <p><span class="span">Friday:</span>
+                    {% if day.open_time != 'None' and day.close_time != 'None' %}
+                        {{day.open_time}} - {{day.close_time}}
+                    {% else %}
+                        Closed
+                    {% endif %}
+                </p>
+            {% elif day.day == 5 %}
+        <p><span class="span">Saturday:</span>
+                    {% if day.open_time != 'None' and day.close_time != 'None' %}
+                        {{day.open_time}} - {{day.close_time}}
+                    {% else %}
+                        Closed
+                    {% endif %}
+                </p>
+            {% elif day.day == 6 %}
+        <p><span class="span">Sunday:</span>
+                    {% if day.open_time != 'None' and day.close_time != 'None' %}
+                        {{day.open_time}} - {{day.close_time}}
+                    {% else %}
+                        Closed
+                    {% endif %}
+                </p>
+            {% else %}
+                <p>No Business Hours Have Been Set Yet!</p>
+            {% endif %}
+        {% endfor %}
+    </div>
+    </div>
+    <div class="new">
+    <div class="update-availability">
+        <form method="POST" action="" enctype="multipart/form-data">
+        {{form.hidden_tag()}}
+            <fieldset class="form-group">
+                <!--  Update Availability    -->
+                <div class="form-group">
+                    {{ form.capacity.label(class="form-title") }}
+                        {{ form.capacity(class="form-control-file") }}
+                        {% if form.capacity.errors %}
+                          {% for error in form.capacity.errors %}
+                            <span class="text-danger">{{ error }}</span><br>
+                          {% endfor %}
+                          <br>
+                        {% endif %}
+                </div>
+
+                <!-- Change Restaurant Hours -->
+                <div class="form-group sched-layout">
+
+                    <!-- Monday -->
+                        <div class="day">
+                        {{ form.mon_start.label(class="form-title") }}
+                        {{ form.mon_start(class="form-control-file") }}
+                        {% if form.mon_start.errors %}
+                          {% for error in form.mon_start.errors %}
+                            <span class="text-danger">{{ error }}</span><br>
+                          {% endfor %}
+                          <br>
+                        {% endif %}
+
+                        {{ form.mon_end(class="form-control-file") }}
+                        {% if form.mon_end.errors %}
+                          {% for error in form.mon_end.errors %}
+                            <span class="text-danger">{{ error }}</span><br>
+                          {% endfor %}
+                          <br>
+                        {% endif %}
+
+                        </div>
+                        <div class="day">
+                    <!-- Tuesday -->
+                        {{ form.tues_start.label(class="form-title") }}
+                        {{ form.tues_start(class="form-control-file") }}
+                        {% if form.tues_start.errors %}
+                          {% for error in form.tues_start.errors %}
+                            <span class="text-danger">{{ error }}</span><br>
+                          {% endfor %}
+                          <br>
+                        {% endif %}
+
+                        {{ form.tues_end(class="form-control-file") }}
+                        {% if form.tues_end.errors %}
+                          {% for error in form.tues_end.errors %}
+                            <span class="text-danger">{{ error }}</span><br>
+                          {% endfor %}
+                          <br>
+                        {% endif %}
+                        </div>
+                        <div class="day">
+                    <!-- Wednesday -->
+                        {{ form.wed_start.label(class="form-title") }}
+                        {{ form.wed_start(class="form-control-file") }}
+                        {% if form.wed_start.errors %}
+                          {% for error in form.wed_start.errors %}
+                            <span class="text-danger">{{ error }}</span><br>
+                          {% endfor %}
+                          <br>
+                        {% endif %}
+
+                        {{ form.wed_end(class="form-control-file") }}
+                        {% if form.wed_end.errors %}
+                          {% for error in form.wed_end.errors %}
+                            <span class="text-danger">{{ error }}</span><br>
+                          {% endfor %}
+                          <br>
+                        {% endif %}
+                        </div>
+                        <div class="day">
+                    <!-- Thursday -->
+                        {{ form.th_start.label(class="form-title") }}
+                        {{ form.th_start(class="form-control-file") }}
+                        {% if form.th_start.errors %}
+                          {% for error in form.th_start.errors %}
+                            <span class="text-danger">{{ error }}</span><br>
+                          {% endfor %}
+                          <br>
+                        {% endif %}
+
+                        {{ form.th_end(class="form-control-file") }}
+                        {% if form.th_end.errors %}
+                          {% for error in form.th_end.errors %}
+                            <span class="text-danger">{{ error }}</span><br>
+                          {% endfor %}
+                          <br>
+                        {% endif %}
+                        </div>
+                        <div class="day">
+                    <!-- Friday -->
+                        {{ form.fri_start.label(class="form-title") }}
+                        {{ form.fri_start(class="form-control-file") }}
+                        {% if form.fri_start.errors %}
+                          {% for error in form.fri_start.errors %}
+                            <span class="text-danger">{{ error }}</span><br>
+                          {% endfor %}
+                          <br>
+                        {% endif %}
+
+                        {{ form.fri_end(class="form-control-file") }}
+                        {% if form.fri_end.errors %}
+                          {% for error in form.fri_end.errors %}
+                            <span class="text-danger">{{ error }}</span><br>
+                          {% endfor %}
+                          <br>
+                        {% endif %}
+                        </div>
+                        <div class="day">
+                    <!-- Saturday -->
+                        {{ form.sat_start.label(class="form-title") }}
+                        {{ form.sat_start(class="form-control-file") }}
+                        {% if form.sat_start.errors %}
+                          {% for error in form.sat_start.errors %}
+                            <span class="text-danger">{{ error }}</span><br>
+                          {% endfor %}
+                          <br>
+                        {% endif %}
+
+                        {{ form.sat_end(class="form-control-file") }}
+                        {% if form.sat_end.errors %}
+                          {% for error in form.sat_end.errors %}
+                            <span class="text-danger">{{ error }}</span><br>
+                          {% endfor %}
+                          <br>
+                        {% endif %}
+                        </div>
+                        <div class="day">
+                    <!-- Sunday -->
+                        {{ form.sun_start.label(class="form-title") }}
+                        {{ form.sun_start(class="form-control-file") }}
+                        {% if form.sun_start.errors %}
+                          {% for error in form.sun_start.errors %}
+                            <span class="text-danger">{{ error }}</span><br>
+                          {% endfor %}
+                          <br>
+                        {% endif %}
+
+                        {{ form.sun_end(class="form-control-file") }}
+                        {% if form.sun_end.errors %}
+                          {% for error in form.sun_end.errors %}
+                            <span class="text-danger">{{ error }}</span><br>
+                          {% endfor %}
+                          <br>
+                        {% endif %}
+                </div>
+            </fieldset>
+            <div class="form-group">
+              {{form.submit_schedule(class="btn btn-info",id = "Update")}}
+            </div>
+          </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

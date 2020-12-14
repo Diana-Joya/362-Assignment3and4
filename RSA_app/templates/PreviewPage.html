@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+{% block title %} {{current_user.name}} {% endblock %}
+{% block description %}
+    {{current_user.name}}
+{% endblock %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/previewpage.css') }}"/>
+{% endblock %}
+{% block content %}
+<div class="site">
+    <h1 class="restaurant-brand"> {{ current_user.name }} </h1>
+    <div class="top">
+<div class="restaurant-info-card">
+    <br>
+    <div class="cards">
+        <div class="info-card">
+            <div class="box-title">
+                <h3 class="h3">Info:</h3>
+            </div>
+            <div class="box-content">
+                <p><span class="span">Address: </span>{{ current_user.address }}</p>
+                <p><span class="span">Phone: </span>{{ current_user.phone }}</p>
+                <p><span class="span">Food Type: </span>{{ current_user.food_type }} </p>
+                <p><span class="span">Cost Level: </span>{{ current_user.cost }} </p>
+            </div>
+        </div>
+        <div class="sched-card">
+            <div class="box-title">
+                <h3 class="h3">Schedule: </h3>
+            </div>
+            <div class="box-content">
+                {% for day in current_user.schedule %}
+                    {% if day.day == 0 %}
+                <p><span class="span">Monday:</span>
+                            {% if day.open_time != 'None' and day.close_time != 'None' %}
+                               {{day.open_time}} - {{day.close_time}}
+                            {% else %}
+                                Closed
+                            {% endif %}
+                        </p>
+                    {% elif day.day == 1 %}
+                <p><span class="span">Tuesday: </span>
+                            {% if day.open_time != 'None' and day.close_time != 'None' %}
+                                {{day.open_time}} - {{day.close_time}}
+                            {% else %}
+                                Closed
+                            {% endif %}
+                        </p>
+                    {% elif day.day == 2 %}
+                <p><span class="span">Wednesday: </span>
+                            {% if day.open_time != 'None' and day.close_time != 'None' %}
+                                {{day.open_time}} - {{day.close_time}}
+                            {% else %}
+                                Closed
+                            {% endif %}
+                        </p>
+                    {% elif day.day == 3 %}
+                <p><span class="span">Thursday:</span>
+                            {% if day.open_time != 'None' and day.close_time != 'None' %}
+                                {{day.open_time}} - {{day.close_time}}
+                            {% else %}
+                                Closed
+                            {% endif %}
+                        </p>
+                    {% elif day.day == 4 %}
+                <p><span class="span">Friday:</span>
+                            {% if day.open_time != 'None' and day.close_time != 'None' %}
+                                {{day.open_time}} - {{day.close_time}}
+                            {% else %}
+                                Closed
+                            {% endif %}
+                        </p>
+                    {% elif day.day == 5 %}
+                <p><span class="span">Saturday:</span>
+                            {% if day.open_time != 'None' and day.close_time != 'None' %}
+                                {{day.open_time}} - {{day.close_time}}
+                            {% else %}
+                                Closed
+                            {% endif %}
+                        </p>
+                    {% elif day.day == 6 %}
+                <p><span class="span">Sunday:</span>
+                            {% if day.open_time != 'None' and day.close_time != 'None' %}
+                                {{day.open_time}} - {{day.close_time}}
+                            {% else %}
+                                Closed
+                            {% endif %}
+                        </p>
+                    {% else %}
+                        <p>No Business Hours Have Been Set Yet!</p>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="customer-opts">
+    <div class="restaurant-reserv-card">
+        <button type="button" class="btn btn-info">Make Reservations</button>
+    </div>
+    <div class="restaurant-order-card">
+        <button type="button" class="btn btn-info">Order Now</button>
+    </div>
+</div>
+    </div>
+    <div class="restaurant-menu-card">
+    <h1 class="menu-title">Menu</h1>
+    <div class="menu-cards">
+    {% for item in items %}
+        {% if item.available %}
+            <div class="item-card">
+                <div class="item-info">
+                <h2 class="item-name">{{ item.name }}</h2>
+                <p class="ing">Ingredients: {{ item.ingredients }}</p>
+                <p class="allergens">Allergens: {{ item.allergens }}</p>
+                <p class="price">Price: {{ item.price }}</p>
+                </div>
+                    <img src="{{ url_for('static', filename='images/pexels-jonathan-borba-2983101.jpg') }}">
+            </div>
+        {% endif %}
+    {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

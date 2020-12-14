@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/all.css') }}"/>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/base.css') }}"/>
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap" rel="stylesheet">
+        <title>{% block title %}{% endblock %}</title>
+        {% block css %}{% endblock %}
+    </head>
+    <body>
+    <!--  NavBar  -->
+        <nav class="navbar navbar-expand-lg ">
+            {% if current_user.is_authenticated %}
+                <a class="navbar-brand" href="/">{{ current_user.name }}</a>
+            {% else %}
+                <a class="navbar-brand" href="/">Restaurant Services App</a>
+            {% endif %}
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarText">
+              {% if current_user.is_authenticated %}
+                <ul class="navbar-nav mr-auto">
+                  <li class="nav-item active">
+                    <a class="nav-link" href="home">Home <span class="sr-only">(current)</span></a>
+                  </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="logout">Sign Out <span class="sr-only"></span></a>
+                  </li>
+                </ul>
+              {% else %}
+                <ul class="navbar-nav mr-auto">
+                  <li class="nav-item active">
+                    <a class="nav-link" href="signup">Sign Up!<span class="sr-only"></span></a>
+                  </li>
+                </ul>
+              {% endif %}
+            <span class="navbar-text">
+              {% block description %}{% endblock %}
+            </span>
+          </div>
+        </nav>
+    <!--  End of NavBar  -->
+
+        {% block content %}
+        {% endblock %}
+
+     <!-- Footer -->
+        <footer class="container-fluid text-center footer">
+            <div class="footer-content row app-title">
+                <h3 class="fh3">Restaurant Services App</h3>
+            </div>
+          <div class="footer-content row">
+            <div class="footer-section about-us column">
+              <h3 class="fh3">About this app:</h3>
+                <p class="fp">The Restaurant Services App allows users to create a web profile for their restaurant and manage Restaurant information, menu, reservations, and orders.</p>
+            </div>
+            <div class="footer-section connect column">
+              <h3 class="fh3">Connect with me:</h3>
+                <a href="https://github.com/Diana-Joya/362-Assignment3and4"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/diana-joya/"><i class="fab fa-linkedin"></i></a>
+            </div>
+          </div>
+          <div class="footer-bottom row tm">
+            &copy; Restaurant Services app | Designed by Diana Joya
+          </div>
+        </footer>
+    <!-- End of Footer -->
+
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    </body>
+</html>

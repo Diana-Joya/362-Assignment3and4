@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %} Current Orders Page {% endblock %}
+{% block description %}
+    {{ current_user.name }}'s Current Orders!
+{% endblock %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/orders.css') }}"/>
+{% endblock %}
+{% block content %}
+<h1> Current and New Orders </h1>
+    <div class="status">
+    <div class="open">
+        <h2>New Orders:</h2>
+        {% for order in open %}
+            <div class="order-card">
+                <h1 class="order-name">{{ order.timestamp }}</h1>
+                {% for item in order.order_items %}
+                    <p>{{ item.qty }}</p>
+                {% endfor %}
+                <form action="{{ url_for('accept_order') }}" method=post class=accept-order>
+                  <input type=hidden value="{{ order.order_id }}" name=order_to_accept />
+                  <input type=submit value="Accept"/>
+                </form>
+                <form action="{{ url_for('complete_order') }}" method=post class=complete-order>
+                  <input type=hidden value="{{ order.order_id }}" name=order_to_complete />
+                  <input type=submit value="Reject"/>
+                </form>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="accepted">
+        <h2>Pending Orders:</h2>
+        {% for order in accepted %}
+             <div class="order-card">
+                <h1 class="order-name">{{ order.timestamp }}</h1>
+                {% for item in order.order_items %}
+                    <p>{{ item.qty }}</p>
+                {% endfor %}
+                <form action="{{ url_for('complete_order') }}" method=post class=complete-order>
+                  <input type=hidden value="{{ order.order_id }}" name=order_to_complete />
+                  <input type=submit value="Completed"/>
+                </form>
+            </div>
+        {% endfor %}
+    </div>
+    </div>
+{% endblock %}

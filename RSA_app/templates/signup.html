@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% block title %} Sign Up Page {% endblock %}
+{% block description %}
+    Create your account now!
+{% endblock %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/index.css') }}"/>
+{% endblock %}
+{% block content %}
+<h1 class="h1-signup"> Sign Up For a Restaurant Account </h1>
+<div class="sign-up-section">
+<form action="#" method="post">
+    {{form.hidden_tag()}}
+    <fieldset class="form-group">
+        <div class="signup-form">
+      <div class="col">
+    <!-- Restaurant Name -->
+    <div class="form-group">
+        {{form.restaurant_name.label(class="form-control-label small")}}
+
+        <!-- Prints out errors if any-->
+        {%if form.restaurant_name.errors%}
+          {{form.restaurant_name(class="form-control is-invalid")}}
+          <div class="invalid-feedback">
+            {%for error in form.restaurant_name.errors%}
+              <span>{{error}}</span>
+            {%endfor%}
+          </div>
+          {%else%}
+            {{form.restaurant_name(class="form-control")}}
+        {%endif%}
+
+      </div>
+
+    <!-- Restaurant Email -->
+    <div class="form-group">
+        {{form.restaurant_email.label(class="form-control-label small")}}
+
+        <!-- Prints out errors if any-->
+        {%if form.restaurant_email.errors%}
+          {{form.restaurant_email(class="form-control is-invalid")}}
+          <div class="invalid-feedback">
+            {%for error in form.restaurant_email.errors%}
+              <span>{{error}}</span>
+            {%endfor%}
+          </div>
+          {%else%}
+            {{form.restaurant_email(class="form-control")}}
+        {%endif%}
+
+      </div>
+      </div>
+        <div class="col">
+    <!-- Restaurant Password -->
+    <div class="form-group">
+        {{form.password.label(class="form-control-label small")}}
+
+        <!-- Prints out errors if any-->
+        {%if form.password.errors%}
+          {{form.password(class="form-control is-invalid")}}
+          <div class="invalid-feedback">
+            {%for error in form.password.errors%}
+              <span>{{error}}</span>
+            {%endfor%}
+          </div>
+          {%else%}
+            {{form.password(class="form-control")}}
+        {%endif%}
+
+      </div>
+
+    <!-- Confirm Password -->
+    <div class="form-group">
+        {{form.confirm_password.label(class="form-control-label small")}}
+
+        <!-- Prints out errors if any-->
+        {%if form.confirm_password.errors%}
+          {{form.confirm_password(class="form-control is-invalid")}}
+          <div class="invalid-feedback">
+            {%for error in form.confirm_password.errors%}
+              <span>{{error}}</span>
+            {%endfor%}
+          </div>
+          {%else%}
+            {{form.confirm_password(class="form-control")}}
+        {%endif%}
+
+      </div>
+    </div>
+            </div>
+    </fieldset>
+    <div class="form-group sub">
+      {{form.submit_signup(class="btn btn-info")}}
+    </div>
+</form>
+</div>
+
+{% endblock %}
